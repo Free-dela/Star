@@ -1,0 +1,24 @@
+{
+  "name": "integrationscripts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test --headed",
+    "code": "npx playwright codegen",
+    "allure": "npx allure generate allure-results --clean",
+    "allures": "npx allure open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "dependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.1",
+    "allure-playwright": "^3.1.0"
+  }
+}
