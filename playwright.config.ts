@@ -11,7 +11,8 @@ export default defineConfig({    // ['allure', { outputFolder: 'allure-results' 
   video: 'on', // Record videos of tests
   reporter: [
     ['html'], 
-    ['allure-playwright'],  // Add allure reporter
+   ['allure-playwright', { outputFolder: 'allure-results', useRelativePath: true }]
+  ],  // Add allure reporter
     ['dot'] // Dot-style reporter (minimal output)
   ],
   use: {
