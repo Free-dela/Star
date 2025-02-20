@@ -15,7 +15,7 @@ export default defineConfig({    // ['allure', { outputFolder: 'allure-results' 
     ['dot'] // Dot-style reporter (minimal output)
   ],
   use: {
-    headless: false, // Run tests in headless mode (false = launch browser UI)
+    headless: true, // Run tests in headless mode (false = launch browser UI)
     trace: 'on', // Enable tracing for failed tests 
   },
   projects: [
