@@ -1,33 +1,37 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  workers: process.env.CI ? 6 : 4, // Number of workers based on CI environment
-  testDir: 'Star', // Directory where test files are located
-  timeout: 360000, // Global test timeout (7 minutes)
-  retries: 1, // Number of retries for failed tests
-  snapshotDir: 'snapshots', // Directory where snapshots are stored
-  video: 'on', // Record videos of tests
+  workers: process.env.CI ? 1 : 4, // Reduce workers in CI to prevent rate limiting
+  testDir: 'Star',
+  timeout: 500000,
+  retries: process.env.CI ? 2 : 1, // More retries in CI
+  snapshotDir: 'snapshots',
   reporter: [
-    ['html'], // HTML report for Playwright test results
-    ['dot']   // Dot-style reporter for minimal output
+    ['html'],
+    ['dot']
   ],
   use: {
-    headless: true, // Run tests in headless mode (false = launch browser UI)
-    trace: 'on', // Enable tracing for failed tests 
+    headless: false, // Run in headed mode
+    trace: 'retain-on-failure',
+    video: 'retain-on-failure',
+    screenshot: 'only-on-failure',
+    navigationTimeout: 30000,
+    actionTimeout: 15000,
+    baseURL: 'https://vizzainsurance.com',
+    launchOptions: {
+      args: ['--start-maximized']
+    },
   },
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { 
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1920, height: 1080 },
+      },
     },
-    // Uncomment if you want to test on Firefox and WebKit as well:
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
   ],
+  expect: {
+    timeout: 10000,
+  },
 });

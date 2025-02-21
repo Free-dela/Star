@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import readline from 'readline';
 
-test('SWC', async ({ page }) => {
+test('SCP', async ({ page }) => {
   await page.goto('https://vizzainsurance.com/home');
   await page.getByRole('button', { name: 'Login' }).click();
   await page.getByRole('link', { name: '   POS Login' }).click();
@@ -103,6 +103,13 @@ test('SWC', async ({ page }) => {
   await page.locator('#mat-input-80').fill('100');
   await page.waitForTimeout(10000);
   await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
+  
+  // Add explicit wait for checkbox visibility
+  await page.waitForSelector('#mat-checkbox-16 > .mat-checkbox-layout > .mat-checkbox-inner-container', { state: 'visible', timeout: 30000 });
   await page.locator('#mat-checkbox-16 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
+  
+  // Add small delay before next actions
+  await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Copy Link' }).click();
-  await page.getByRole('button', { name: 'Pay by Customer' }).click()});
+  await page.getByRole('button', { name: 'Pay by Customer' }).click();
+});
