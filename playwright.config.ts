@@ -1,5 +1,4 @@
 import { defineConfig, devices } from '@playwright/test';
-// import allure from 'allure-playwright';
 
 export default defineConfig({
   workers: process.env.CI ? 6 : 4, // Number of workers based on CI environment
@@ -9,9 +8,8 @@ export default defineConfig({
   snapshotDir: 'snapshots', // Directory where snapshots are stored
   video: 'on', // Record videos of tests
   reporter: [
-    ['html'], 
-    ['allure-playwright', { outputFolder: 'allure-results', useRelativePath: true }],  // Allure reporter
-    ['dot'] // Dot-style reporter (minimal output)
+    ['html'], // HTML report for Playwright test results
+    ['dot']   // Dot-style reporter for minimal output
   ],
   use: {
     headless: true, // Run tests in headless mode (false = launch browser UI)
