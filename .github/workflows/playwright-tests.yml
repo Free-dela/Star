@@ -20,7 +20,8 @@ jobs:
 
     - name: Install Playwright browsers
       run: |
-        sudo npx playwright install
+        sudo npm install -g playwright  # Install Playwright globally with elevated permissions
+        sudo npx playwright install     # Ensure the browsers are installed
 
     - name: Set up Xvfb
       run: |
@@ -36,4 +37,3 @@ jobs:
       with:
         name: playwright-report
         path: playwright-report/
-
