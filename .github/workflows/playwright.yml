@@ -22,8 +22,6 @@ jobs:
     - name: Install Playwright Browsers
       run: |
         npx playwright install --with-deps chromium
-    - name: Set up Xvfb and network settings
-      run: |
         sudo apt-get update
         sudo apt-get install -y xvfb
         sudo sysctl -w net.ipv4.tcp_keepalive_time=60
