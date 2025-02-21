@@ -1,8 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 // import allure from 'allure-playwright';
 
-export default defineConfig({    // ['allure', { outputFolder: 'allure-results' }]  // Allure reporter with output folder
-
+export default defineConfig({
   workers: process.env.CI ? 6 : 4, // Number of workers based on CI environment
   testDir: 'Star', // Directory where test files are located
   timeout: 360000, // Global test timeout (7 minutes)
@@ -11,8 +10,7 @@ export default defineConfig({    // ['allure', { outputFolder: 'allure-results' 
   video: 'on', // Record videos of tests
   reporter: [
     ['html'], 
-   ['allure-playwright', { outputFolder: 'allure-results', useRelativePath: true }]
-  ],  // Add allure reporter
+    ['allure-playwright', { outputFolder: 'allure-results', useRelativePath: true }],  // Allure reporter
     ['dot'] // Dot-style reporter (minimal output)
   ],
   use: {
