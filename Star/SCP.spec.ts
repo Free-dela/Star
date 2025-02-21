@@ -55,7 +55,7 @@ test('SWC', async ({ page }) => {
   await page.getByRole('textbox', { name: 'PAN Number' }).fill('gjkpm0846p');
   await page.getByRole('button', { name: 'Submit' }).click();
  
-  const imagePath = process.env.TEST_ASSETS_DIR ? `${process.env.TEST_ASSETS_DIR}/Arunkumar.jpg` : 'C:/Users/Tecdata/Desktop/IntegrationScripts/Arunkumar.jpg';
+  const imagePath = 'C:/Users/Tecdata/Desktop/IntegrationScripts/assets/Arunkumar.jpg';
 
   const fileInput = await page.locator('input[type="file"]').first();
   await fileInput.setInputFiles(imagePath);
@@ -65,6 +65,7 @@ test('SWC', async ({ page }) => {
 
   const fileInput2 = await page.locator('input[type="file"]').nth(2);
   await fileInput2.setInputFiles(imagePath);
+
   await page.locator('span.mat-button-wrapper:has-text("Submit")').click();
 
   await page.locator('#mat-checkbox-12 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();

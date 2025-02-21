@@ -56,7 +56,7 @@ test('SHP', async ({ page }) => {
     await page.getByRole('textbox', { name: 'PAN Number' }).type('gjkpm0846p');
     await page.getByRole('button', { name: 'Submit' }).click();
    
-    const imagePath = process.env.TEST_ASSETS_DIR ? `${process.env.TEST_ASSETS_DIR}/Arunkumar.jpg` : 'C:/Users/Tecdata/Desktop/IntegrationScripts/Arunkumar.jpg';
+    const imagePath = 'C:/Users/Tecdata/Desktop/IntegrationScripts/assets/Arunkumar.jpg';
 
     const fileInput = await page.locator('input[type="file"]').first();
     await fileInput.setInputFiles(imagePath);
