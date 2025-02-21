@@ -13,10 +13,23 @@ test('SHP', async ({ page }) => {
     await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
     await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
     await page.waitForLoadState('networkidle');
-    await page.getByRole('textbox', { name: 'Name' }).type('Test');
-  await page.getByRole('textbox', { name: 'email' }).type('Free@gmail.com');
-  await page.getByRole('textbox', { name: 'phone Number' }).fill('8531913069');
-  await page.getByRole('button', { name: 'Next' }).click();
+    // Wait for form to be visible and interactive
+    await page.waitForSelector('input[name="Name"]', { state: 'visible', timeout: 30000 });
+    
+    // Fill the form with added waits
+    const nameInput = page.getByRole('textbox', { name: 'Name' });
+    await nameInput.waitFor({ state: 'visible' });
+    await nameInput.type('Test', { timeout: 30000 });
+    
+    const emailInput = page.getByRole('textbox', { name: 'email' });
+    await emailInput.waitFor({ state: 'visible' });
+    await emailInput.type('Free@gmail.com', { timeout: 30000 });
+    
+    const phoneInput = page.getByRole('textbox', { name: 'phone Number' });
+    await phoneInput.waitFor({ state: 'visible' });
+    await phoneInput.fill('8531913069', { timeout: 30000 });
+    
+    await page.getByRole('button', { name: 'Next' }).click();
 
   await page.locator('#mat-input-17').type('25');
   await page.locator('#mat-input-19').type('25');

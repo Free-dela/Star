@@ -2,18 +2,30 @@ import { test, expect } from '@playwright/test';
 import readline from 'readline';
 
 test('SCP', async ({ page }) => {
+  // Initial navigation and login
   await page.goto('https://vizzainsurance.com/home');
   await page.getByRole('button', { name: 'Login' }).click();
   await page.getByRole('link', { name: '   POS Login' }).click();
   await page.getByRole('textbox', { name: 'Mobile number' }).fill('9962907312');
   await page.getByRole('textbox', { name: 'Password' }).fill('admin1');
   await page.locator('#main-content').getByRole('button', { name: 'Login' }).click();
+  
+  // Navigate to Health Insurance section with better waits
+  await page.waitForLoadState('networkidle');
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
+  await page.waitForTimeout(1000); // Small delay after hover
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
   await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
+  
+  // Wait for page load and form visibility
   await page.waitForLoadState('networkidle');
+  await page.waitForSelector('input[name="Name"]', { state: 'visible', timeout: 30000 });
+  
+  // Fill in initial form with proper waits
   await page.getByRole('textbox', { name: 'Name' }).fill('Test');
+  await page.waitForTimeout(500);
   await page.getByRole('textbox', { name: 'email' }).type('Free@gmail.com');
+  await page.waitForTimeout(500);
   await page.getByRole('textbox', { name: 'phone Number' }).fill('8531913069');
   await page.getByRole('button', { name: 'Next' }).click();
 
