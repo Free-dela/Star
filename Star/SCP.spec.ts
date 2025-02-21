@@ -19,7 +19,6 @@ test('SCP', async ({ page }) => {
   
   // Wait for page load and form visibility
   await page.waitForLoadState('networkidle');
-  await page.waitForSelector('input[name="Name"]', { state: 'visible', timeout: 30000 });
   
   // Fill in initial form with proper waits
   await page.getByRole('textbox', { name: 'Name' }).fill('Test');

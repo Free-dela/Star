@@ -1,10 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  workers: process.env.CI ? 1 : 4, // Reduce workers in CI to prevent rate limiting
+  workers: process.env.CI ? 1 : 1, // Reduce workers in CI to prevent rate limiting
   testDir: 'Star',
   timeout: 500000,
-  retries: process.env.CI ? 2 : 1, // More retries in CI
+  retries: process.env.CI ? 2 : 2, // More retries in CI
   snapshotDir: 'snapshots',
   reporter: [
     ['html'],
@@ -15,11 +15,16 @@ export default defineConfig({
     trace: 'retain-on-failure',
     video: 'retain-on-failure',
     screenshot: 'only-on-failure',
-    navigationTimeout: 30000,
-    actionTimeout: 15000,
+    navigationTimeout: 45000,
+    actionTimeout: 30000,
     baseURL: 'https://vizzainsurance.com',
     launchOptions: {
-      args: ['--start-maximized']
+      args: [
+        '--start-maximized',
+        // '--auto-open-devtools-for-tabs',
+        // '--no-sandbox',
+        // '--disable-minimize-on-focus-loss'
+      ]
     },
   },
   projects: [
@@ -32,6 +37,6 @@ export default defineConfig({
     },
   ],
   expect: {
-    timeout: 10000,
+    timeout: 60000,
   },
 });

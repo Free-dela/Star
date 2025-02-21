@@ -14,7 +14,6 @@ test('SWC', async ({ page }) => {
   await page.waitForLoadState('networkidle');
   
   // Add explicit waits for the form
-  await page.waitForSelector('input[name="Name"]', { state: 'visible', timeout: 30000 });
   
   const nameInput = page.getByRole('textbox', { name: 'Name' });
   await nameInput.waitFor({ state: 'visible' });
