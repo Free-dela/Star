@@ -16,15 +16,12 @@ test('SWC', async ({ page }) => {
   // Add explicit waits for the form
   
   const nameInput = page.getByRole('textbox', { name: 'Name' });
-  await nameInput.waitFor({ state: 'visible' });
   await nameInput.fill('Test', { timeout: 30000 });
   
   const emailInput = page.getByRole('textbox', { name: 'email' });
-  await emailInput.waitFor({ state: 'visible' });
   await emailInput.type('Free@gmail.com', { timeout: 30000 });
   
   const phoneInput = page.getByRole('textbox', { name: 'phone Number' });
-  await phoneInput.waitFor({ state: 'visible' });
   await phoneInput.fill('8531913069', { timeout: 30000 });
   
   const nextButton = page.getByRole('button', { name: 'Next' });

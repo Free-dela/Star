@@ -17,15 +17,12 @@ test('SHP', async ({ page }) => {
     
     // Fill the form with added waits
     const nameInput = page.getByRole('textbox', { name: 'Name' });
-    await nameInput.waitFor({ state: 'visible' });
     await nameInput.type('Test', { timeout: 30000 });
     
     const emailInput = page.getByRole('textbox', { name: 'email' });
-    await emailInput.waitFor({ state: 'visible' });
     await emailInput.type('Free@gmail.com', { timeout: 30000 });
     
     const phoneInput = page.getByRole('textbox', { name: 'phone Number' });
-    await phoneInput.waitFor({ state: 'visible' });
     await phoneInput.fill('8531913069', { timeout: 30000 });
     
     await page.getByRole('button', { name: 'Next' }).click();
