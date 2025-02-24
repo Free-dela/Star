@@ -20,7 +20,7 @@ test('SHP', async ({ page }) => {
     await nameInput.type('Test', { timeout: 30000 });
     
     const emailInput = page.getByRole('textbox', { name: 'email' });
-    await emailInput.type('Free@gmail.com', { timeout: 30000 });
+    await emailInput.type('Free@gmail.com',);
     
     const phoneInput = page.getByRole('textbox', { name: 'phone Number' });
     await phoneInput.fill('8531913069', { timeout: 30000 });

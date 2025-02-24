@@ -8,10 +8,15 @@ test('SWC', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Mobile number' }).fill('9962907312');
   await page.getByRole('textbox', { name: 'Password' }).fill('admin1');
   await page.locator('#main-content').getByRole('button', { name: 'Login' }).click();
+  
+  // Navigate to Health Insurance section with better waits
+  await page.waitForLoadState('networkidle');
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
+  await page.waitForTimeout(1000); // Small delay after hover
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
   await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
   await page.waitForLoadState('networkidle');
+
   
   // Add explicit waits for the form
   
@@ -22,7 +27,7 @@ test('SWC', async ({ page }) => {
   await emailInput.type('Free@gmail.com', { timeout: 30000 });
   
   const phoneInput = page.getByRole('textbox', { name: 'phone Number' });
-  await phoneInput.fill('8531913069', { timeout: 30000 });
+  await phoneInput.fill('8531913069',);
   
   const nextButton = page.getByRole('button', { name: 'Next' });
   await nextButton.waitFor({ state: 'visible' });
