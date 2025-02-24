@@ -47,19 +47,22 @@ test('SWC', async ({ page }) => {
   await page.getByText('Star Health', { exact: true }).click();
   await page.waitForSelector('button:has-text("₹ 14904/Yr")');
   await page.getByRole('button', { name: '₹ 14904/Yr' }).click();
+
   
-  // Add explicit wait before interacting with title dropdown
-  await page.waitForLoadState('networkidle');
-  await page.waitForTimeout(2000);
+  // Improve title selection with better waiting strategy
+  await page.waitForTimeout(3000);
   const titleCombobox = page.getByRole('combobox', { name: 'Title Title' });
-  await titleCombobox.waitFor({ state: 'visible' });
-  await titleCombobox.locator('span').click();
-  
-  // Wait for dropdown options to be visible
-  await page.waitForTimeout(1000);
-  const msOption = page.getByText('Ms', { exact: true });
-  await msOption.waitFor({ state: 'visible' });
+  await titleCombobox.waitFor({ state: 'visible', timeout: 60000 });
+  await titleCombobox.click();
+
+  // Wait for dropdown to open and options to be loaded
+  await page.waitForTimeout(2000);
+  await page.waitForSelector('mat-option', { state: 'visible', timeout: 60000 });
+  const msOption = page.getByRole('option', { name: 'Ms', exact: true });
+  await msOption.waitFor({ state: 'visible', timeout: 60000 });
   await msOption.click();
+
+  // Add verification that selection was successful
 
   await page.getByRole('textbox', { name: 'First Name' }).type('Test');
   await page.getByRole('textbox', { name: 'Last Name' }).type('W');

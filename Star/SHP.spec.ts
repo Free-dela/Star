@@ -53,13 +53,17 @@ test('SHP', async ({ page }) => {
     // Improve title selection with better waits
     await page.waitForLoadState('networkidle');
     await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000); // Give more time for dropdown to be ready
     const titleDropdown = page.getByRole('combobox', { name: 'Title Title' });
-    await titleDropdown.waitFor({ state: 'visible' });
-    await titleDropdown.locator('span').click();
-    
-    // Use exact text matching for Mr option
-    await page.waitForSelector('mat-option');
-    await page.getByRole('option', { name: 'Mr', exact: true }).click();
+    await titleDropdown.waitFor({ state: 'visible', timeout: 60000 });
+    await titleDropdown.click();
+
+    // Wait for dropdown to open and options to be loaded
+    await page.waitForTimeout(2000);
+    await page.waitForSelector('mat-option', { state: 'visible', timeout: 60000 });
+    const mrOption = page.getByRole('option', { name: 'Mr', exact: true });
+    await mrOption.waitFor({ state: 'visible', timeout: 60000 });
+    await mrOption.click();
     
     await page.getByRole('textbox', { name: 'First Name' }).type('Test');
     await page.getByRole('textbox', { name: 'Last Name' }).type('AA');
@@ -83,7 +87,10 @@ test('SHP', async ({ page }) => {
   await page.waitForSelector('span.mat-option-text:has-text("K Block Pattalam")');
   await page.locator('span.mat-option-text:has-text("K Block Pattalam")').click();
     await page.locator('span.mat-button-wrapper:has-text("Next")').nth(0).click();
-    await page.locator('#mat-radio-52 > .mat-radio-label > .mat-radio-container > .mat-radio-outer-circle').click();
+    await page.waitForTimeout(2000);
+    const radioButton = page.locator('#mat-radio-52');
+    await radioButton.waitFor({ state: 'visible', timeout: 60000 });
+    await radioButton.click({ force: true });
     await page.getByRole('textbox', { name: 'PAN Number' }).type('gjkpm0846p');
     await page.getByRole('button', { name: 'Submit' }).click();
    
