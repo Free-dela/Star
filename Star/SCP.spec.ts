@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import path from 'path';
 import readline from 'readline';
 
 test('SCP', async ({ page }) => {
@@ -87,8 +88,8 @@ test('SCP', async ({ page }) => {
   await page.getByRole('textbox', { name: 'PAN Number' }).fill('gjkpm0846p');
   await page.getByRole('button', { name: 'Submit' }).click();
  
-  const imagePath = 'C:/Users/Tecdata/Desktop/IntegrationScripts/assets/Arunkumar.jpg';
-
+  const imagePath = path.join(__dirname, '../assets/Arunkumar.jpg');
+  
   const fileInput = await page.locator('input[type="file"]').first();
   await fileInput.setInputFiles(imagePath);
 
