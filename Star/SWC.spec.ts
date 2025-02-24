@@ -11,23 +11,26 @@ test('SWC', async ({ page }) => {
   
   // Navigate to Health Insurance section with better waits
   await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000); // Give extra time for menu to be ready
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
   await page.waitForTimeout(1000); // Small delay after hover
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
   await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
   await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
 
-  
   // Add explicit waits for the form
-  
   const nameInput = page.getByRole('textbox', { name: 'Name' });
-  await nameInput.fill('Test', { timeout: 30000 });
+  await nameInput.waitFor({ state: 'visible', timeout: 45000 });
+  await nameInput.fill('Test');
   
   const emailInput = page.getByRole('textbox', { name: 'email' });
-  await emailInput.type('Free@gmail.com', { timeout: 30000 });
+  await emailInput.waitFor({ state: 'visible' });
+  await emailInput.fill('Free@gmail.com');
   
   const phoneInput = page.getByRole('textbox', { name: 'phone Number' });
-  await phoneInput.fill('8531913069',);
+  await phoneInput.waitFor({ state: 'visible' });
+  await phoneInput.fill('8531913069');
   
   const nextButton = page.getByRole('button', { name: 'Next' });
   await nextButton.waitFor({ state: 'visible' });
@@ -43,8 +46,20 @@ test('SWC', async ({ page }) => {
   await page.getByText('Star Health', { exact: true }).click();
   await page.waitForSelector('button:has-text("₹ 14904/Yr")');
   await page.getByRole('button', { name: '₹ 14904/Yr' }).click();
-  await page.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
-  await page.getByText('Ms', { exact: true }).click();
+  
+  // Add explicit wait before interacting with title dropdown
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+  const titleCombobox = page.getByRole('combobox', { name: 'Title Title' });
+  await titleCombobox.waitFor({ state: 'visible' });
+  await titleCombobox.locator('span').click();
+  
+  // Wait for dropdown options to be visible
+  await page.waitForTimeout(1000);
+  const msOption = page.getByText('Ms', { exact: true });
+  await msOption.waitFor({ state: 'visible' });
+  await msOption.click();
+
   await page.getByRole('textbox', { name: 'First Name' }).type('Test');
   await page.getByRole('textbox', { name: 'Last Name' }).type('W');
   await page.getByLabel('1PROPOSER DETAILS').getByText('OccupationOccupation *').click();
@@ -118,5 +133,13 @@ test('SWC', async ({ page }) => {
   await page.locator('#mat-input-80').fill('100');
   await page.waitForTimeout(7000);
   await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
+  
+  // Add explicit wait for checkbox visibility at the end
+  await page.waitForSelector('#mat-checkbox-16 > .mat-checkbox-layout > .mat-checkbox-inner-container', { state: 'visible', timeout: 30000 });
+  await page.locator('#mat-checkbox-16 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
+  
+  // Add small delay before final actions
+  await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Copy Link' }).click();
-  await page.getByRole('button', { name: 'Pay by Customer' }).click()});
+  await page.getByRole('button', { name: 'Pay by Customer' }).click();
+});

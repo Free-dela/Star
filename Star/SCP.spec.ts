@@ -5,13 +5,14 @@ test('SCP', async ({ page }) => {
   // Initial navigation and login
   await page.goto('https://vizzainsurance.com/home');
   await page.getByRole('button', { name: 'Login' }).click();
-  await page.getByRole('link', { name: '   POS Login' }).click();
+  await page.getByRole('link', { name: '   POS Login' }).click();
   await page.getByRole('textbox', { name: 'Mobile number' }).fill('9962907312');
   await page.getByRole('textbox', { name: 'Password' }).fill('admin1');
   await page.locator('#main-content').getByRole('button', { name: 'Login' }).click();
   
   // Navigate to Health Insurance section with better waits
   await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000); // Give extra time for menu to be ready
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
   await page.waitForTimeout(1000); // Small delay after hover
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
@@ -19,9 +20,13 @@ test('SCP', async ({ page }) => {
   
   // Wait for page load and form visibility
   await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
   
   // Fill in initial form with proper waits
-  await page.getByRole('textbox', { name: 'Name' }).fill('Test');
+  const nameInput = page.getByRole('textbox', { name: 'Name' });
+  await nameInput.waitFor({ state: 'visible' });
+  await nameInput.fill('Test');
+  
   await page.waitForTimeout(500);
   await page.getByRole('textbox', { name: 'email' }).type('Free@gmail.com');
   await page.waitForTimeout(500);
@@ -38,8 +43,20 @@ test('SCP', async ({ page }) => {
   await page.getByText('Star Health', { exact: true }).click();
   await page.waitForSelector('button:has-text("₹ 14904/Yr")');
   await page.getByRole('button', { name: '₹ 14904/Yr' }).click();
-  await page.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
-  await page.getByText('Ms', { exact: true }).click();
+  
+  // Add explicit wait before interacting with title dropdown
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+  const titleCombobox = page.getByRole('combobox', { name: 'Title Title' });
+  await titleCombobox.waitFor({ state: 'visible' });
+  await titleCombobox.locator('span').click();
+  
+  // Wait for dropdown options to be visible
+  await page.waitForTimeout(1000);
+  const msOption = page.getByText('Ms', { exact: true });
+  await msOption.waitFor({ state: 'visible' });
+  await msOption.click();
+  
   await page.getByRole('textbox', { name: 'First Name' }).type('Test');
   await page.getByRole('textbox', { name: 'Last Name' }).type('W');
   await page.getByLabel('1PROPOSER DETAILS').getByText('OccupationOccupation *').click();

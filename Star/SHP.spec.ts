@@ -9,21 +9,32 @@ test('SHP', async ({ page }) => {
     await page.getByRole('textbox', { name: 'Mobile number' }).fill('9962907312');
     await page.getByRole('textbox', { name: 'Password' }).fill('admin1');
     await page.locator('#main-content').getByRole('button', { name: 'Login' }).click();
+    
+    // Wait for page load after login
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(2000);
+    
     await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
+    await page.waitForTimeout(1000);
     await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
     await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
-    await page.waitForLoadState('networkidle');
-    // Wait for form to be visible and interactive
     
-    // Fill the form with added waits
+    // Enhanced waits for form loading
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(2000);
+    
+    // Wait for and fill the form with better visibility checks
     const nameInput = page.getByRole('textbox', { name: 'Name' });
-    await nameInput.type('Test', { timeout: 30000 });
+    await nameInput.waitFor({ state: 'visible', timeout: 45000 });
+    await nameInput.fill('Test');
     
     const emailInput = page.getByRole('textbox', { name: 'email' });
-    await emailInput.type('Free@gmail.com',);
+    await emailInput.waitFor({ state: 'visible' });
+    await emailInput.fill('Free@gmail.com');
     
     const phoneInput = page.getByRole('textbox', { name: 'phone Number' });
-    await phoneInput.fill('8531913069', { timeout: 30000 });
+    await phoneInput.waitFor({ state: 'visible' });
+    await phoneInput.fill('8531913069');
     
     await page.getByRole('button', { name: 'Next' }).click();
 
