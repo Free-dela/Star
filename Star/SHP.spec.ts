@@ -48,8 +48,18 @@ test('SHP', async ({ page }) => {
     await page.waitForSelector('mat-option:has-text("Star Health")');
     await page.getByText('Star Health', { exact: true }).click();
     await page.getByRole('button', { name: '₹ 12930/Yr' }).click();
-    await page.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
-    await page.getByText('Mr', { exact: true }).click();
+    
+    // Improve title selection with better waits
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(2000);
+    const titleDropdown = page.getByRole('combobox', { name: 'Title Title' });
+    await titleDropdown.waitFor({ state: 'visible' });
+    await titleDropdown.locator('span').click();
+    
+    // Use exact text matching for Mr option
+    await page.waitForSelector('mat-option');
+    await page.getByRole('option', { name: 'Mr', exact: true }).click();
+    
     await page.getByRole('textbox', { name: 'First Name' }).type('Test');
     await page.getByRole('textbox', { name: 'Last Name' }).type('AA');
     await page.getByLabel('1PROPOSER DETAILS').getByText('OccupationOccupation *').click();

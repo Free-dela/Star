@@ -79,7 +79,11 @@ test('SCP', async ({ page }) => {
   await page.waitForSelector('span.mat-option-text:has-text("K Block Pattalam")');
   await page.locator('span.mat-option-text:has-text("K Block Pattalam")').click();
   await page.locator('span.mat-button-wrapper:has-text("Next")').nth(0).click();
-  await page.locator('#mat-radio-64 > .mat-radio-label > .mat-radio-container > .mat-radio-outer-circle').click();
+  
+  // Fix radio button click by using the label instead of the circle
+  await page.waitForTimeout(2000);
+  await page.locator('#mat-radio-64').click();
+  
   await page.getByRole('textbox', { name: 'PAN Number' }).fill('gjkpm0846p');
   await page.getByRole('button', { name: 'Submit' }).click();
  

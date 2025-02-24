@@ -11,19 +11,19 @@ export default defineConfig({
     ['dot']
   ],
   use: {
-    headless: false, // Run in headed mode
+    headless: process.env.CI ? true : false, // Headless in CI, headed locally
     trace: 'retain-on-failure',
     video: 'retain-on-failure',
     screenshot: 'only-on-failure',
     navigationTimeout: 45000,
-    actionTimeout: 30000,
+    actionTimeout: 45000, // Increased from 30000 to match navigation timeout
     baseURL: 'https://vizzainsurance.com',
+    viewport: { width: 1920, height: 1080 }, // Consistent viewport size
     launchOptions: {
       args: [
         '--start-maximized',
-        // '--auto-open-devtools-for-tabs',
-        // '--no-sandbox',
-        // '--disable-minimize-on-focus-loss'
+        '--disable-dev-shm-usage', // Useful for CI
+        '--no-sandbox', // Required for CI
       ]
     },
   },

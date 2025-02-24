@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test --headed",
-    "code": "npx playwright codegen",
-    "allure": "npx allure generate allure-results --clean",
-    "allures": "npx allure open"
+    "test": "playwright test",
+    "test:local": "playwright test --headed",
+    "test:ci": "xvfb-run --server-args=\"-screen 0 1920x1080x24\" playwright test --workers=1",
+    "test:debug": "playwright test --debug",
+    "show-report": "playwright show-report",
+    "install:browsers": "playwright install --with-deps",
+    "code": "playwright codegen",
+    "allure": "allure generate allure-results --clean",
+    "allures": "allure open"
   },
   "keywords": [],
   "author": "",
