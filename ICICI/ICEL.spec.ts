@@ -46,7 +46,8 @@ test('ICICI Elevate', async ({ page }) => {
   await page.getByText('ICICI Lombard').click();
 
   await page.getByRole('button', { name: '₹ 9514/Yr' }).click();
-  await page.locator('#mat-radio-10 > .mat-radio-label > .mat-radio-container > .mat-radio-outer-circle').click();
+  await page.waitForTimeout(2000);
+  await page.getByText('OVD Upload').click();
   await page.getByRole('textbox', { name: 'Email *' }).click();
   await page.getByRole('textbox', { name: 'Email *' }).fill('freedela0912@gmail.com');
   await page.locator('div').filter({ hasText: /^Mobile No \*$/ }).nth(3).click();
