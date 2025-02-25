@@ -4,41 +4,37 @@ import readline from 'readline';
 
 test('SHP', async ({ page }) => {
   
-    await page.goto('https://vizzainsurance.com/home');
-    await page.getByRole('button', { name: 'Login' }).click();
-    await page.getByRole('link', { name: '   POS Login' }).click();
-    await page.getByRole('textbox', { name: 'Mobile number' }).fill('9962907312');
-    await page.getByRole('textbox', { name: 'Password' }).fill('admin1');
-    await page.locator('#main-content').getByRole('button', { name: 'Login' }).click();
-    
-    // Wait for page load after login
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
-    
-    await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
-    await page.waitForTimeout(1000);
-    await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
-    await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
-    
-    // Enhanced waits for form loading
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
-    
-    // Wait for and fill the form with better visibility checks
-    const nameInput = page.getByRole('textbox', { name: 'Name' });
-    await nameInput.waitFor({ state: 'visible', timeout: 45000 });
-    await nameInput.fill('Test');
-    
-    const emailInput = page.getByRole('textbox', { name: 'email' });
-    await emailInput.waitFor({ state: 'visible' });
-    await emailInput.fill('Free@gmail.com');
-    
-    const phoneInput = page.getByRole('textbox', { name: 'phone Number' });
-    await phoneInput.waitFor({ state: 'visible' });
-    await phoneInput.fill('8531913069');
-    
-    await page.getByRole('button', { name: 'Next' }).click();
+  await page.goto('https://vizzainsurance.com/home');
+  await page.getByRole('button', { name: 'Login' }).click();
+  await page.getByRole('link', { name: '   POS Login' }).click();
+  await page.getByRole('textbox', { name: 'Mobile number' }).fill('9962907312');
+  await page.getByRole('textbox', { name: 'Password' }).fill('admin1');
+  await page.locator('#main-content').getByRole('button', { name: 'Login' }).click();
+  
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000); 
+  await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
+  await page.waitForTimeout(1000);
+  await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
+  await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
 
+  const nameInput = page.getByRole('textbox', { name: 'Name' });
+  await nameInput.waitFor({ state: 'visible', timeout: 45000 });
+  await nameInput.fill('Test');
+  
+  const emailInput = page.getByRole('textbox', { name: 'email' });
+  await emailInput.waitFor({ state: 'visible' });
+  await emailInput.fill('Free@gmail.com');
+  
+  const phoneInput = page.getByRole('textbox', { name: 'phone Number' });
+  await phoneInput.waitFor({ state: 'visible' });
+  await phoneInput.fill('8531913069');
+  
+  const nextButton = page.getByRole('button', { name: 'Next' });
+  await nextButton.waitFor({ state: 'visible' });
+  await nextButton.click();
   await page.locator('#mat-input-17').type('25');
   await page.locator('#mat-input-19').type('25');
   await page.getByRole('textbox', { name: 'PIN CODE' }).type('600012');

@@ -10,17 +10,15 @@ test('SWC', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Password' }).fill('admin1');
   await page.locator('#main-content').getByRole('button', { name: 'Login' }).click();
   
-  // Navigate to Health Insurance section with better waits
   await page.waitForLoadState('networkidle');
-  await page.waitForTimeout(2000); // Give extra time for menu to be ready
+  await page.waitForTimeout(2000); 
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
-  await page.waitForTimeout(1000); // Small delay after hover
+  await page.waitForTimeout(1000);
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
   await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
   await page.waitForLoadState('networkidle');
   await page.waitForTimeout(2000);
 
-  // Add explicit waits for the form
   const nameInput = page.getByRole('textbox', { name: 'Name' });
   await nameInput.waitFor({ state: 'visible', timeout: 45000 });
   await nameInput.fill('Test');
@@ -48,14 +46,11 @@ test('SWC', async ({ page }) => {
   await page.waitForSelector('button:has-text("₹ 14904/Yr")');
   await page.getByRole('button', { name: '₹ 14904/Yr' }).click();
 
-  
-  // Improve title selection with better waiting strategy
-  await page.waitForTimeout(3000);
+    await page.waitForTimeout(3000);
   const titleCombobox = page.getByRole('combobox', { name: 'Title Title' });
   await titleCombobox.waitFor({ state: 'visible', timeout: 60000 });
   await titleCombobox.click();
 
-  // Wait for dropdown to open and options to be loaded
   await page.waitForTimeout(2000);
   await page.waitForSelector('mat-option', { state: 'visible', timeout: 60000 });
   const msOption = page.getByRole('option', { name: 'Ms', exact: true });

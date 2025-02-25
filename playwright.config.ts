@@ -1,10 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  workers: process.env.CI ? 1 : 1, // Reduce workers in CI to prevent rate limiting
-  testDir: 'Star',
+  workers: process.env.CI ? 2 : 2, // Reduce workers in CI to prevent rate limiting
+  testDir: '.', // Changed to use root directory which contains both ICICI and Star folders
   timeout: 500000,
-  retries: process.env.CI ? 3 : 3, // More retries in CI
+  retries: process.env.CI ? 1 : 0, // More retries in CI
   snapshotDir: 'snapshots',
   reporter: [
     ['html'],
@@ -20,6 +20,7 @@ export default defineConfig({
     baseURL: 'https://vizzainsurance.com',
     viewport: { width: 1920, height: 1080 }, // Consistent viewport size
     launchOptions: {
+      devtools: false,
       args: [
         '--start-maximized',
         '--disable-dev-shm-usage', // Useful for CI
