@@ -7,8 +7,12 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 2, // More retries in CI
   snapshotDir: 'snapshots',
   reporter: [
-    ['html'],
-    ['dot']
+    ['list'], // Shows real-time test execution in terminal
+    ['html'], // Creates detailed HTML report with screenshots and traces
+    ['allure-playwright'], // Creates detailed Allure reports with rich features
+    ['junit', { outputFile: 'test-results/junit.xml' }], // For CI integration
+    ['json', { outputFile: 'test-results/test-results.json' }], // For programmatic analysis
+    ['line'] // Simple line-by-line output for CI logs
   ],
   use: {
     headless: process.env.CI ? true : false, // Headless in CI, headed locally
