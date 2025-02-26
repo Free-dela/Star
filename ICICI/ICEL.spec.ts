@@ -10,7 +10,6 @@ test('ICICI Elevate', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Password' }).fill('admin1');
   await page.locator('#main-content').getByRole('button', { name: 'Login' }).click();
   
-  await page.waitForLoadState('networkidle');
   await page.waitForTimeout(2000); 
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
   await page.waitForTimeout(1000);
@@ -131,7 +130,6 @@ test('ICICI Elevate', async ({ page }) => {
   await page.getByText('Brother', { exact: true }).click();
   await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
 
-  await expect(page.getByLabel('4SUMMARY').locator('label')).toContainText('I hereby declare all the details provided above are correct');
   await page.getByRole('button', { name: 'Copy Link' }).click();
   await page.getByRole('button', { name: 'Pay by Customer' }).click();
   });

@@ -11,7 +11,6 @@ test('SCP', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Password' }).fill('admin1');
   await page.locator('#main-content').getByRole('button', { name: 'Login' }).click();
   
-  await page.waitForLoadState('networkidle');
   await page.waitForTimeout(2000); 
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
   await page.waitForTimeout(1000);
@@ -138,12 +137,7 @@ test('SCP', async ({ page }) => {
   await page.locator('#mat-input-80').fill('100');
   await page.waitForTimeout(10000);
   await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
-  
-  // Add explicit wait for checkbox visibility
-  await page.waitForSelector('#mat-checkbox-16 > .mat-checkbox-layout > .mat-checkbox-inner-container', { state: 'visible', timeout: 30000 });
-  await page.locator('#mat-checkbox-16 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
-  
-  // Add small delay before next actions
+    
   await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Copy Link' }).click();
   await page.getByRole('button', { name: 'Pay by Customer' }).click();

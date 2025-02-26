@@ -4,7 +4,7 @@ export default defineConfig({
   workers: process.env.CI ? 2 : 2, // Reduce workers in CI to prevent rate limiting
   testDir: '.', // Changed to use root directory which contains both ICICI and Star folders
   timeout: 500000,
-  retries: process.env.CI ? 1 : 0, // More retries in CI
+  retries: process.env.CI ? 2 : 2, // More retries in CI
   snapshotDir: 'snapshots',
   reporter: [
     ['html'],

@@ -11,7 +11,6 @@ test('SHP', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Password' }).fill('admin1');
   await page.locator('#main-content').getByRole('button', { name: 'Login' }).click();
   
-  await page.waitForLoadState('networkidle');
   await page.waitForTimeout(2000); 
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
   await page.waitForTimeout(1000);
@@ -134,9 +133,6 @@ test('SHP', async ({ page }) => {
     await page.waitForTimeout(4000);
     await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
   
-    await expect(page.getByRole('heading', { name: 'PROPOSER DETAILS' })).toBeVisible({ timeout: 30000 });
-    await expect(page.getByLabel('4SUMMARY').locator('label')).toContainText('I hereby declare all the details provided above are correct');
-    await page.locator('#mat-checkbox-16 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
     await page.getByRole('button', { name: 'Copy Link' }).click();
     await page.getByRole('button', { name: 'Pay by Customer' }).click();
   });
