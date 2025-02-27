@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { takeSnapshot } from '../utils/snapshot-helper';
 const path = require('path');
 
 test('ICICI Elevate', async ({ page }) => {
@@ -89,6 +90,9 @@ test('ICICI Elevate', async ({ page }) => {
   await page.getByRole('textbox', { name: 'State' }).click();
   await page.waitForTimeout(2000);
 
+  // Snapshot 1: After initial form fill
+  await takeSnapshot(page, 'ICEL-initial-form');
+
   await page.locator('span.mat-button-wrapper:has-text("Next")').nth(0).click();
   await page.waitForTimeout(2000);
 
@@ -124,12 +128,18 @@ test('ICICI Elevate', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Weight(kg) *' }).fill('60');
   await page.locator('span.mat-button-wrapper:has-text("Next")').nth(1).click();
 
+  // Snapshot 2: After personal details
+  await takeSnapshot(page, 'ICEL-personal-details');
+
   await page.getByRole('textbox', { name: 'Name of Nominee *' }).type('Nominee');
   await page.locator('#mat-input-63').type('09121999');
   await page.getByLabel('Relationship with Nominee *').getByText('Relationship with Nominee *').click();
   await page.getByText('Brother', { exact: true }).click();
   await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
 
+  // Snapshot 3: Before payment
+  await takeSnapshot(page, 'ICEL-pre-payment');
+
   await page.getByRole('button', { name: 'Copy Link' }).click();
   await page.getByRole('button', { name: 'Pay by Customer' }).click();
-  });
+});

@@ -5,7 +5,7 @@ export default defineConfig({
   testDir: '.', // Changed to use root directory which contains both ICICI and Star folders
   timeout: 500000,
   retries: process.env.CI ? 2 : 2, // More retries in CI
-  snapshotDir: 'snapshots',
+  snapshotDir: './snapshots',
   reporter: [
     ['list'], // Shows real-time test execution in terminal
     ['html'], // Creates detailed HTML report with screenshots and traces
@@ -39,9 +39,15 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         viewport: { width: 1920, height: 1080 },
       },
+      snapshotDir: './snapshots/chromium',
     },
   ],
   expect: {
     timeout: 60000,
+    toHaveScreenshot: {
+      maxDiffPixels: 100,
+      threshold: 0.2,
+      maxDiffPixelRatio: 0.1
+    }
   },
 });

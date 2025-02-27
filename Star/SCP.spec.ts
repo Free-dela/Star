@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import path from 'path';
 import readline from 'readline';
+import { takeSnapshot } from '../utils/snapshot-helper';
 
 test('SCP', async ({ page }) => {
   // Initial navigation and login
@@ -141,4 +142,17 @@ test('SCP', async ({ page }) => {
   await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Copy Link' }).click();
   await page.getByRole('button', { name: 'Pay by Customer' }).click();
+
+  // Snapshot 1: After initial form completion
+  await takeSnapshot(page, 'SCP-initial-form');
+  
+  // ...existing code until medical details...
+  
+  // Snapshot 2: After medical details
+  await takeSnapshot(page, 'SCP-medical-details');
+  
+  // ...existing code until final review...
+  
+  // Snapshot 3: Final review page
+  await takeSnapshot(page, 'SCP-final-review');
 });

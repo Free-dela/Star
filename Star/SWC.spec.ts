@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import path from 'path';
 import readline from 'readline';
+import { takeSnapshot } from '../utils/snapshot-helper';
 
 test('SWC', async ({ page }) => {
   await page.goto('https://vizzainsurance.com/home');
@@ -45,7 +46,9 @@ test('SWC', async ({ page }) => {
   await page.waitForSelector('button:has-text("₹ 14904/Yr")');
   await page.getByRole('button', { name: '₹ 14904/Yr' }).click();
 
-    await page.waitForTimeout(3000);
+  await takeSnapshot(page, 'SWC-quote-selection');
+
+  await page.waitForTimeout(3000);
   const titleCombobox = page.getByRole('combobox', { name: 'Title Title' });
   await titleCombobox.waitFor({ state: 'visible', timeout: 60000 });
   await titleCombobox.click();
@@ -100,6 +103,8 @@ test('SWC', async ({ page }) => {
   await fileInput2.setInputFiles(imagePath);
   await page.locator('span.mat-button-wrapper:has-text("Submit")').click();
 
+  await takeSnapshot(page, 'SWC-documents-uploaded');
+
   await page.locator('#mat-checkbox-12 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
   await page.getByRole('textbox', { name: 'Height(cms)' }).type('170');
   await page.getByRole('textbox', { name: 'Weight(kgs)' }).type('70');
@@ -135,6 +140,8 @@ test('SWC', async ({ page }) => {
   await page.locator('#mat-input-80').fill('100');
   await page.waitForTimeout(7000);
   await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
+
+  await takeSnapshot(page, 'SWC-final-review');
   
   // Add small delay before final actions
   await page.waitForTimeout(2000);

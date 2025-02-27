@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import path from 'path';
 import readline from 'readline';
+import { takeSnapshot } from '../utils/snapshot-helper';
 
 test('SHP', async ({ page }) => {
   
@@ -45,8 +46,10 @@ test('SHP', async ({ page }) => {
     await page.getByText('Star Health', { exact: true }).click();
     await page.getByRole('button', { name: '₹ 12930/Yr' }).click();
     
+    // Snapshot 1: After quote selection
+    await takeSnapshot(page, 'SHP-selected-quote');
+    
     // Improve title selection with better waits
-    await page.waitForLoadState('networkidle');
     await page.waitForTimeout(2000);
     await page.waitForTimeout(3000); // Give more time for dropdown to be ready
     const titleDropdown = page.getByRole('combobox', { name: 'Title Title' });
@@ -81,6 +84,10 @@ test('SHP', async ({ page }) => {
   await page.locator('#mat-select-value-35').click();
   await page.waitForSelector('span.mat-option-text:has-text("K Block Pattalam")');
   await page.locator('span.mat-option-text:has-text("K Block Pattalam")').click();
+    
+    // Snapshot 2: After proposer details
+    await takeSnapshot(page, 'SHP-proposer-details');
+    
     await page.locator('span.mat-button-wrapper:has-text("Next")').nth(0).click();
     await page.waitForTimeout(2000);
     const radioButton = page.locator('#mat-radio-52');
@@ -133,6 +140,9 @@ test('SHP', async ({ page }) => {
     await page.waitForTimeout(4000);
     await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
   
+    // Snapshot 3: Before payment initiation
+    await takeSnapshot(page, 'SHP-pre-payment');
+    
     await page.getByRole('button', { name: 'Copy Link' }).click();
     await page.getByRole('button', { name: 'Pay by Customer' }).click();
-  });
+});
