@@ -11,6 +11,8 @@ test('SHP', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Mobile number' }).fill('9962907312');
   await page.getByRole('textbox', { name: 'Password' }).fill('admin1');
   await page.locator('#main-content').getByRole('button', { name: 'Login' }).click();
+
+  await page.pause();
   
   await page.waitForTimeout(2000); 
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
@@ -139,6 +141,8 @@ test('SHP', async ({ page }) => {
     await page.locator('#mat-input-80').fill('100');
     await page.waitForTimeout(4000);
     await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
+
+    await page.pause();
   
     // Snapshot 3: Before payment initiation
     await takeSnapshot(page, 'SHP-pre-payment');

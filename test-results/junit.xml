@@ -1,18 +1,6 @@
-<testsuites id="" name="" tests="4" failures="0" skipped="0" errors="0" time="186.02349800000002">
-<testsuite name="ICICI\ICEL.spec.ts" timestamp="2025-02-27T06:19:57.947Z" hostname="chromium" tests="1" failures="0" skipped="0" time="89.291" errors="0">
-<testcase name="ICICI Elevate" classname="ICICI\ICEL.spec.ts" time="89.291">
-</testcase>
-</testsuite>
-<testsuite name="Star\SCP.spec.ts" timestamp="2025-02-27T06:19:57.947Z" hostname="chromium" tests="1" failures="0" skipped="0" time="98.492" errors="0">
-<testcase name="SCP" classname="Star\SCP.spec.ts" time="98.492">
-</testcase>
-</testsuite>
-<testsuite name="Star\SHP.spec.ts" timestamp="2025-02-27T06:19:57.947Z" hostname="chromium" tests="1" failures="0" skipped="0" time="91.809" errors="0">
-<testcase name="SHP" classname="Star\SHP.spec.ts" time="91.809">
-</testcase>
-</testsuite>
-<testsuite name="Star\SWC.spec.ts" timestamp="2025-02-27T06:19:57.947Z" hostname="chromium" tests="1" failures="0" skipped="0" time="84.516" errors="0">
-<testcase name="SWC" classname="Star\SWC.spec.ts" time="84.516">
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="188.70974400001765">
+<testsuite name="Star\SHP.spec.ts" timestamp="2025-03-01T06:58:50.821Z" hostname="chromium" tests="1" failures="0" skipped="0" time="184.948" errors="0">
+<testcase name="SHP" classname="Star\SHP.spec.ts" time="184.948">
 </testcase>
 </testsuite>
 </testsuites>

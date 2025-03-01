@@ -11,7 +11,7 @@
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 2
+      "actualWorkers": 1
     },
     "preserveOutput": "always",
     "reporter": [
@@ -53,7 +53,7 @@
       {
         "outputDir": "C:/Users/M/Desktop/Star/test-results",
         "repeatEach": 1,
-        "retries": 2,
+        "retries": 0,
         "metadata": {},
         "id": "chromium",
         "name": "chromium",
@@ -67,92 +67,12 @@
     ],
     "shard": null,
     "updateSnapshots": "missing",
-    "updateSourceMethod": "patch",
+    "updateSourceMethod": "3way",
     "version": "1.50.1",
     "workers": 2,
     "webServer": null
   },
   "suites": [
-    {
-      "title": "ICICI\\ICEL.spec.ts",
-      "file": "ICICI/ICEL.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [
-        {
-          "title": "ICICI Elevate",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 500000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium",
-              "projectName": "chromium",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "status": "passed",
-                  "duration": 89291,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-02-27T06:19:59.062Z",
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "f3bd414d726ad72cbd04-62903ff15d59b5ace41c",
-          "file": "ICICI/ICEL.spec.ts",
-          "line": 5,
-          "column": 5
-        }
-      ]
-    },
-    {
-      "title": "Star\\SCP.spec.ts",
-      "file": "Star/SCP.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [
-        {
-          "title": "SCP",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 500000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium",
-              "projectName": "chromium",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "status": "passed",
-                  "duration": 98492,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-02-27T06:19:59.721Z",
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "5c2ddcb63d0f6f42639c-8703e2cd36efa5a2d849",
-          "file": "Star/SCP.spec.ts",
-          "line": 6,
-          "column": 5
-        }
-      ]
-    },
     {
       "title": "Star\\SHP.spec.ts",
       "file": "Star/SHP.spec.ts",
@@ -172,14 +92,14 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 0,
+                  "workerIndex": 9,
                   "status": "passed",
-                  "duration": 91809,
+                  "duration": 184948,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2025-02-27T06:21:28.689Z",
+                  "startTime": "2025-03-01T06:58:51.946Z",
                   "attachments": []
                 }
               ],
@@ -192,53 +112,13 @@
           "column": 5
         }
       ]
-    },
-    {
-      "title": "Star\\SWC.spec.ts",
-      "file": "Star/SWC.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [
-        {
-          "title": "SWC",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 500000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium",
-              "projectName": "chromium",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "status": "passed",
-                  "duration": 84516,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-02-27T06:21:38.661Z",
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "43518294016f64785e55-f69591d90ecf9068056f",
-          "file": "Star/SWC.spec.ts",
-          "line": 6,
-          "column": 5
-        }
-      ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-02-27T06:19:57.886Z",
-    "duration": 186023.49800000002,
-    "expected": 4,
+    "startTime": "2025-03-01T06:58:49.488Z",
+    "duration": 188709.74400001764,
+    "expected": 1,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
