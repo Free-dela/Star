@@ -41,8 +41,10 @@ test('SCP', async ({ page }) => {
   await page.getByRole('button', { name: 'Proceed' }).click();
  
   await page.waitForSelector('#mat-select-value-5');
-  await page.locator('#mat-select-value-5').getByText('(+5 others)').click();
-  await page.getByText('Star Health', { exact: true }).click();
+  // await page.locator('#mat-select-value-5').getByText('(+5 others)').click();
+  // await page.locator('#mat-select-value-5').getByText('(+4 others)').click();
+
+  // await page.getByText('Star Health', { exact: true }).click();
   await page.waitForSelector('button:has-text("₹ 14904/Yr")');
   await page.getByRole('button', { name: '₹ 14904/Yr' }).click();
   
@@ -71,15 +73,11 @@ test('SCP', async ({ page }) => {
   await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Address 2 *').type('Star Assure');
   await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Pincode *').type('600012');
   await page.waitForTimeout(2000);
-  await page.waitForSelector('#mat-select-value-33');
-  await page.locator('#mat-select-value-33').click();
-  await page.waitForSelector('span.mat-option-text:has-text("Chennai")');
-  await page.locator('span.mat-option-text:has-text("Chennai")').click();
+  await page.getByLabel('1PROPOSER DETAILS').getByLabel('City *').getByText('City').click();
+  await page.getByText('Chennai').click();
   await page.waitForTimeout(2000);
-  await page.waitForSelector('#mat-select-value-35');
-  await page.locator('#mat-select-value-35').click();
-  await page.waitForSelector('span.mat-option-text:has-text("K Block Pattalam")');
-  await page.locator('span.mat-option-text:has-text("K Block Pattalam")').click();
+  await page.getByLabel('1PROPOSER DETAILS').getByLabel('Area *').getByText('Area').click();
+  await page.getByText('Perambur Barracks').click();
   await page.locator('span.mat-button-wrapper:has-text("Next")').nth(0).click();
   
   // Fix radio button click by using the label instead of the circle
@@ -102,7 +100,7 @@ test('SCP', async ({ page }) => {
 
   await page.locator('span.mat-button-wrapper:has-text("Submit")').click();
 
-  await page.locator('#mat-checkbox-12 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
+  await page.getByLabel('2INSURED DETAILS').getByText('Same as proposer').click();
   await page.getByRole('textbox', { name: 'Height(cms)' }).type('170');
   await page.getByRole('textbox', { name: 'Weight(kgs)' }).type('70');
   await page.locator('#mat-radio-27 > .mat-radio-label > .mat-radio-container > .mat-radio-outer-circle').click();

@@ -41,8 +41,10 @@ test('ICICI Elevate', async ({ page }) => {
   await page.getByRole('textbox', { name: 'PIN CODE' }).click();
   await page.getByRole('textbox', { name: 'PIN CODE' }).fill('600012');
   await page.getByRole('button', { name: 'Proceed' }).click();
-  await page.locator('#mat-select-value-5').getByText('(+5 others)').click();
-  await page.getByText('ICICI Lombard').click();
+  // await page.locator('#mat-select-value-5').getByText('(+5 others)').click();
+  // await page.locator('#mat-select-value-5').getByText('(+4 others)').click();
+
+  // await page.getByText('ICICI Lombard').click();
 
   await page.getByRole('button', { name: '₹ 9514/Yr' }).click();
   await page.waitForTimeout(2000);
