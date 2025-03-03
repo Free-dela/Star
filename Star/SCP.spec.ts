@@ -16,7 +16,6 @@ test('SCP', async ({ page }) => {
   await page.waitForTimeout(1000);
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
   await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
-  await page.waitForLoadState('networkidle');
   await page.waitForTimeout(2000);
 
   const nameInput = page.getByRole('textbox', { name: 'Name' });
@@ -40,17 +39,12 @@ test('SCP', async ({ page }) => {
   await page.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
   await page.getByRole('button', { name: 'Proceed' }).click();
  
-  await page.waitForSelector('#mat-select-value-5');
-  // await page.locator('#mat-select-value-5').getByText('(+5 others)').click();
-  // await page.locator('#mat-select-value-5').getByText('(+4 others)').click();
-
-  // await page.getByText('Star Health', { exact: true }).click();
   await page.waitForSelector('button:has-text("₹ 14904/Yr")');
   await page.getByRole('button', { name: '₹ 14904/Yr' }).click();
   
   // Add explicit wait before interacting with title dropdown
-  await page.waitForLoadState('networkidle');
   await page.waitForTimeout(2000);
+
   const titleCombobox = page.getByRole('combobox', { name: 'Title Title' });
   await titleCombobox.waitFor({ state: 'visible' });
   await titleCombobox.locator('span').click();
@@ -135,7 +129,12 @@ test('SCP', async ({ page }) => {
   await page.locator('#mat-input-80').fill('100');
   await page.waitForTimeout(10000);
   await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
-    
+
+  // Add explicit wait for checkbox visibility
+  await page.waitForSelector('#mat-checkbox-16 > .mat-checkbox-layout > .mat-checkbox-inner-container', { state: 'visible', timeout: 30000 });
+  await page.locator('#mat-checkbox-16 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
+  
+  // Add small delay before next actions
   await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Copy Link' }).click();
   await page.getByRole('button', { name: 'Pay by Customer' }).click();

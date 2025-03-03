@@ -10,6 +10,7 @@ test('ICICI Elevate', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Password' }).fill('admin1');
   await page.locator('#main-content').getByRole('button', { name: 'Login' }).click();
   
+  await page.waitForLoadState('networkidle');
   await page.waitForTimeout(2000); 
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
   await page.waitForTimeout(1000);
@@ -41,13 +42,10 @@ test('ICICI Elevate', async ({ page }) => {
   await page.getByRole('textbox', { name: 'PIN CODE' }).click();
   await page.getByRole('textbox', { name: 'PIN CODE' }).fill('600012');
   await page.getByRole('button', { name: 'Proceed' }).click();
-  // await page.locator('#mat-select-value-5').getByText('(+5 others)').click();
-  // await page.locator('#mat-select-value-5').getByText('(+4 others)').click();
-
-  // await page.getByText('ICICI Lombard').click();
-
+  
   await page.getByRole('button', { name: '₹ 9514/Yr' }).click();
   await page.waitForTimeout(2000);
+
   await page.getByText('OVD Upload').click();
   await page.getByRole('textbox', { name: 'Email *' }).click();
   await page.getByRole('textbox', { name: 'Email *' }).fill('freedela0912@gmail.com');
@@ -66,6 +64,7 @@ test('ICICI Elevate', async ({ page }) => {
 
   await page.getByRole('button', { name: 'Submit' }).click();
   await page.waitForTimeout(2000);
+
   await page.getByLabel('1PROPOSER DETAILS').getByText('Title *Title *').click();
   await page.getByText('Mr', { exact: true }).click();
   await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('First Name *').click();
@@ -132,6 +131,7 @@ test('ICICI Elevate', async ({ page }) => {
   await page.getByText('Brother', { exact: true }).click();
   await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
 
+  await expect(page.getByLabel('4SUMMARY').locator('label')).toContainText('I hereby declare all the details provided above are correct');
   await page.getByRole('button', { name: 'Copy Link' }).click();
   await page.getByRole('button', { name: 'Pay by Customer' }).click();
-  });
+});
