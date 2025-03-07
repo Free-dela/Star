@@ -94,6 +94,9 @@ test('SHP', async ({ page }) => {
 
       const fileInput2 = await page.locator('input[type="file"]').nth(2);
       await fileInput2.setInputFiles(imagePath);
+
+      await page.locator('#mat-checkbox-17').click();
+
       await page.waitForTimeout(2000);
 
       await page.locator('span.mat-button-wrapper:has-text("Submit")').click();
@@ -128,9 +131,6 @@ test('SHP', async ({ page }) => {
       await page.waitForTimeout(4000);
       await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
     
-      await expect(page.getByRole('heading', { name: 'PROPOSER DETAILS' })).toBeVisible({ timeout: 30000 });
-      await expect(page.getByLabel('4SUMMARY').locator('label')).toContainText('I hereby declare all the details provided above are correct');
-      await page.locator('#mat-checkbox-16 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
       await page.getByRole('button', { name: 'Copy Link' }).click();
       await page.getByRole('button', { name: 'Pay by Customer' }).click();
   

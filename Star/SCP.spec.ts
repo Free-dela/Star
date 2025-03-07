@@ -92,6 +92,8 @@ test('SCP', async ({ page }) => {
   const fileInput2 = await page.locator('input[type="file"]').nth(2);
   await fileInput2.setInputFiles(imagePath);
 
+  await page.locator('#mat-checkbox-17').click();
+
   await page.locator('span.mat-button-wrapper:has-text("Submit")').click();
 
   await page.getByLabel('2INSURED DETAILS').getByText('Same as proposer').click();
@@ -129,10 +131,6 @@ test('SCP', async ({ page }) => {
   await page.locator('#mat-input-80').fill('100');
   await page.waitForTimeout(10000);
   await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
-
-  // Add explicit wait for checkbox visibility
-  await page.waitForSelector('#mat-checkbox-16 > .mat-checkbox-layout > .mat-checkbox-inner-container', { state: 'visible', timeout: 30000 });
-  await page.locator('#mat-checkbox-16 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
   
   // Add small delay before next actions
   await page.waitForTimeout(2000);

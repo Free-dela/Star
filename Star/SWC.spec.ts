@@ -91,6 +91,9 @@ test('SWC', async ({ page }) => {
     
     const fileInput2 = await page.locator('input[type="file"]').nth(2);
     await fileInput2.setInputFiles(imagePath);
+
+    await page.locator('#mat-checkbox-17').click();
+
     
     await page.waitForTimeout(2000); // Give time for all uploads to stabilize
     await page.locator('span.mat-button-wrapper:has-text("Submit")').click();
@@ -130,11 +133,7 @@ test('SWC', async ({ page }) => {
     await page.locator('#mat-input-80').fill('100');
     await page.waitForTimeout(7000);
     await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
-    
-    // Add explicit wait for checkbox visibility at the end
-    await page.waitForSelector('#mat-checkbox-16 > .mat-checkbox-layout > .mat-checkbox-inner-container', { state: 'visible', timeout: 30000 });
-    await page.locator('#mat-checkbox-16 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
-    
+        await page.pause();
     // Add small delay before final actions
     await page.waitForTimeout(2000);
     await page.getByRole('button', { name: 'Copy Link' }).click();
