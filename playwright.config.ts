@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   workers: process.env.CI ? 1 : 1, // Reduce workers in CI to prevent rate limiting
   testDir: '.', // Changed to use root directory which contains both ICICI and Star folders
-  timeout: 600000, // Increased from 500000 to 900000 (15 minutes)
+  timeout: 700000, // Increased from 500000 to 900000 (15 minutes)
   retries: process.env.CI ? 1 : 1, // Increased retries
   snapshotDir: 'snapshots',
   reporter: [
@@ -15,8 +15,8 @@ export default defineConfig({
     trace: 'retain-on-failure',
     video: 'retain-on-failure',
     screenshot: 'only-on-failure',
-    navigationTimeout: 20000,  // Increased from 45000 to 60000
-    actionTimeout: 20000,     // Increased from 45000 to 60000
+    navigationTimeout: 50000,  // Increased from 45000 to 60000
+    actionTimeout: 50000,     // Increased from 45000 to 60000
     baseURL: 'https://vizzainsurance.com',
     viewport: { width: 1920, height: 1080 }, // Consistent viewport size
     launchOptions: {

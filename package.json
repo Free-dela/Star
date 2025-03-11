@@ -1,0 +1,20 @@
+{
+  "name": "integration-scripts",
+  "version": "1.0.0",
+  "description": "Integration test scripts",
+  "scripts": {
+    "test": "npx playwright test --headed",
+    "allures": "npx allure generate allure-results --clean ",
+    "allure": "npx allure open"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.51.0",
+    "@types/node": "^20.11.24",
+    "allure-commandline": "^2.33.0",
+    "allure-playwright": "^3.2.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "playwright": "^1.51.0"
+  }
+}

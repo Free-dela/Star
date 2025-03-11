@@ -4,7 +4,7 @@ import readline from 'readline';
 
 test('SWC', async ({ page }) => {
 
-    await page.goto('https://vizzainsurance.com/home');
+    await page.goto('https://vizzainsurance.com/pos/pos-login-view');
     await page.getByRole('button', { name: 'Login' }).click();
     await page.getByRole('link', { name: '   POS Login' }).click();
     await page.getByRole('textbox', { name: 'Mobile number' }).fill('9962907312');
@@ -15,11 +15,12 @@ test('SWC', async ({ page }) => {
     await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
     await page.waitForTimeout(1000);
     await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
+    await 
     await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(5000);
 
     const nameInput = page.getByRole('textbox', { name: 'Name' });
-    await nameInput.waitFor({ state: 'visible', timeout: 45000 });
+    // await nameInput.waitFor({ state: 'visible', timeout: 45000 });
     await nameInput.fill('Test');
     
     const emailInput = page.getByRole('textbox', { name: 'email' });
@@ -133,7 +134,6 @@ test('SWC', async ({ page }) => {
     await page.locator('#mat-input-80').fill('100');
     await page.waitForTimeout(7000);
     await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
-        await page.pause();
     // Add small delay before final actions
     await page.waitForTimeout(2000);
     await page.getByRole('button', { name: 'Copy Link' }).click();

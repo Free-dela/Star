@@ -10,11 +10,11 @@ test('ICICI Elevate', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Password' }).fill('admin1');
   await page.locator('#main-content').getByRole('button', { name: 'Login' }).click();
   
-  await page.waitForLoadState('networkidle');
   await page.waitForTimeout(2000); 
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
   await page.waitForTimeout(1000);
   await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
+  await page.waitForTimeout(5000);
   await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
   await page.waitForLoadState('networkidle');
   await page.waitForTimeout(2000);
