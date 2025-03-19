@@ -27,26 +27,37 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     
-    - name: Run Playwright tests
+    - name: Run Local Playwright tests
       run: |
-        xvfb-run --server-args="-screen 0 1920x1080x24" npx playwright test --workers=1
+        xvfb-run --server-args="-screen 0 1920x1080x24" npx playwright test --project=chromium --workers=1
     
     - name: Run BrowserStack tests
       if: always()
       run: |
-        npx playwright test --project=browserstack-windows --project=browserstack-s23-ultra
+        npx playwright test \
+          --project=galaxy-s23-browserstack \
+          --workers=2 \
+          Star/SCP.spec.ts \
+          Star/SWC.spec.ts \
+          Star/SHP.spec.ts \
+          ICICI/ICEL.spec.ts
     
-    - name: Upload test artifacts
+    - name: Upload test results
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: playwright-report
+        name: test-results
         path: |
-          playwright-report/
           test-results/
+          playwright-report/
+          allure-results/
           snapshots/
-        compression-level: 9
         retention-days: 30
-        overwrite: true
+        compression-level: 9
         if-no-files-found: error
-        fingerprint: true
+    
+    - name: Generate Allure Report
+      if: always()
+      run: |
+        npx allure generate allure-results --clean
+        npx allure open

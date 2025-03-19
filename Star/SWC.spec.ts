@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import path from 'path';
 import readline from 'readline';
 
-test.only('SWC', async ({ page, isMobile }) => {
+test('SWC', async ({ page, isMobile }) => {
     await page.goto('https://vizzainsurance.com/home');
     
     await page.getByRole('button', { name: 'Login' }).click();

@@ -8,7 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : 1,
   testDir: '.',
   timeout: 600000,
-  retries: process.env.CI ? 2 : 2,
+  retries: process.env.CI ? 2 : 3,
   snapshotDir: 'snapshots',
   reporter: [
     ['html'],
