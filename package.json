@@ -4,17 +4,24 @@
   "description": "Integration test scripts",
   "scripts": {
     "test": "npx playwright test --headed",
-    "allures": "npx allure generate allure-results --clean ",
-    "allure": "npx allure open"
+    "allures": "npx allure generate allure-results --clean",
+    "allure": "npx allure open",
+    "test:browserstack": "npx browserstack-node-sdk playwright test --config browserstack.config.ts",
+    "test:bs-chrome": "npm run test:browserstack -- --project='chrome-latest:Windows 11-browserstack'",
+    "test:bs-safari": "npm run test:browserstack -- --project='playwright-webkit-latest:OSX Ventura-browserstack'",
+    "test:bs-mobile": "npm run test:browserstack -- --project='chrome-Samsung Galaxy S23 Ultra:13-browserstack-mobile'"
   },
   "devDependencies": {
     "@playwright/test": "^1.51.0",
     "@types/node": "^20.11.24",
     "allure-commandline": "^2.33.0",
     "allure-playwright": "^3.2.0",
+    "browserstack": "^1.6.1",
+    "browserstack-node-sdk": "^1.34.43",
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "dotenv": "^16.4.7",
     "playwright": "^1.51.0"
   }
 }
