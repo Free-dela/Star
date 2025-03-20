@@ -113,11 +113,8 @@ test('SWC', async ({ page, isMobile }) => {
     await page.getByRole('textbox', { name: 'Height(cms)' }).type('170');
     await page.getByRole('textbox', { name: 'Weight(kgs)' }).type('70');
 
-// await page.getByRole('button', { name: '1.INSURED DETAILS' }).click();
 await page.waitForTimeout(2000);
 await page.getByRole('button', { name: '2.INSURED DETAILS' }).click();
-// await page.evaluate(() => window.scrollTo(0, 0));
- // Scroll to top for better dropdown visibility
  await page.waitForTimeout(2000);
 
     await page.getByRole('textbox', { name: 'Name', exact: true }).type('test w');
@@ -130,6 +127,7 @@ await page.getByRole('button', { name: '2.INSURED DETAILS' }).click();
     await page.getByText('Housewives').click();
     await page.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
     await page.getByText('SPOUSE', { exact: true }).click();
+    await page.waitForTimeout(2000);
     await page.locator('#mat-radio-33 > .mat-radio-label > .mat-radio-container > .mat-radio-outer-circle').click();
     await page.getByRole('textbox', { name: 'Pregnancy Due Date (DD/MM/' }).click();
     await page.getByRole('textbox', { name: 'Pregnancy Due Date (DD/MM/' }).fill('09/07/2025');

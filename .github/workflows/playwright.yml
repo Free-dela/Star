@@ -36,7 +36,7 @@ jobs:
       run: |
         npx playwright test \
           --project=galaxy-s23-browserstack \
-          --workers=2 \
+          --workers=1 \
           Star/SCP.spec.ts \
           Star/SWC.spec.ts \
           Star/SHP.spec.ts \
