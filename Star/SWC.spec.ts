@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import path from 'path';
 import readline from 'readline';
 
-test('SWC', async ({ page, isMobile }) => {
+test.only('SWC', async ({ page, isMobile }) => {
     await page.goto('https://vizzainsurance.com/home');
     
     await page.getByRole('button', { name: 'Login' }).click();
@@ -128,9 +128,6 @@ await page.getByRole('button', { name: '2.INSURED DETAILS' }).click();
     await page.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
     await page.getByText('SPOUSE', { exact: true }).click();
     await page.waitForTimeout(2000);
-    await page.locator('#mat-radio-33 > .mat-radio-label > .mat-radio-container > .mat-radio-outer-circle').click();
-    await page.getByRole('textbox', { name: 'Pregnancy Due Date (DD/MM/' }).click();
-    await page.getByRole('textbox', { name: 'Pregnancy Due Date (DD/MM/' }).fill('09/07/2025');
     await page.getByLabel('2INSURED DETAILS').getByRole('button', { name: 'Next' }).click();
    
     await page.locator('#mat-input-80').fill('Nominee');

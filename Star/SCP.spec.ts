@@ -119,6 +119,7 @@ test('SCP', async ({ page, isMobile }) => {
   await page.getByLabel('2INSURED DETAILS').getByText('Same as proposer').click();
   await page.getByRole('textbox', { name: 'Height(cms)' }).type('170');
   await page.getByRole('textbox', { name: 'Weight(kgs)' }).type('70');
+  await page.waitForElement(2000);
   await page.locator('#mat-radio-30 > .mat-radio-label > .mat-radio-container > .mat-radio-outer-circle').click();
   // await page.getByRole('button', { name: '1.INSURED DETAILS' }).click();
   await page.waitForTimeout(4000);
