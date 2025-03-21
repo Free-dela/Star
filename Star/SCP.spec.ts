@@ -120,7 +120,7 @@ test('SCP', async ({ page, isMobile }) => {
   await page.getByRole('textbox', { name: 'Height(cms)' }).type('170');
   await page.getByRole('textbox', { name: 'Weight(kgs)' }).type('70');
   await page.waitForTimeout(2000);
-  await page.locator('#mat-radio-30 > .mat-radio-label > .mat-radio-container > .mat-radio-outer-circle').click();
+  await page.locator('#mat-radio-30').getByText('Yes').click();
   // await page.getByRole('button', { name: '1.INSURED DETAILS' }).click();
   await page.waitForTimeout(4000);
   await page.getByRole('button', { name: '2.INSURED DETAILS' }).click();
