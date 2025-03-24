@@ -36,11 +36,7 @@ jobs:
       run: |
         npx playwright test \
           --project=galaxy-s23-browserstack \
-          --workers=1 \
-          Star/SCP.spec.ts \
-          Star/SWC.spec.ts \
-          Star/SHP.spec.ts \
-          ICICI/ICEL.spec.ts
+          --workers=1
     
     - name: Upload test results
       uses: actions/upload-artifact@v4
