@@ -1,0 +1,253 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Floater
+- Location: C:\Users\Tecdata\Desktop\IntegrationScripts\Care\CareSupremeFloater.Spec.ts:4:5
+
+# Error details
+
+```
+TimeoutError: locator.click: Timeout 40000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: 'Copy Link' })
+
+    at C:\Users\Tecdata\Desktop\IntegrationScripts\Care\CareSupremeFloater.Spec.ts:129:24
+```
+
+# Page snapshot
+
+```yaml
+- link "vizza-logo":
+  - img "vizza-logo"
+- link "Home"
+- link "About us"
+- link "Event"
+- link "Contact us"
+- link "Careers"
+- link "Online Insurance"
+- link "Two Wheeler Insurance"
+- link "Private Car Insurance"
+- link "New India Insurance"
+- link "Commercial Insurance"
+- link "Dental Insurance"
+- link "Health Insurance"
+- link "Personal Accident"
+- link "Travel Insurance"
+- link "Star Travel Insurance"
+- link "Life Insurance"
+- link "Life-POS"
+- link "Bajaj Goal Suraksha"
+- link "Edelweiss"
+- link "Life Insurance"
+- link "Life Insurance-Term"
+- link "Life Insurance-Endowment"
+- link "ULIP"
+- link "General Insurance"
+- link "Commercial Insurance"
+- link "Jewelers Block Policy"
+- link "Bankers Indemnity Policy"
+- link "Shopkeepers Policy"
+- link "Marine Cargo Policy"
+- link "Contractor Machinery Policy"
+- link "Marine Hull Policy"
+- link "Aviation Insurance"
+- link "Money Insurance"
+- link "House Holder Policy"
+- link "Industrial Insurance"
+- link "Fire Policy"
+- link "Burglary Policy"
+- link "Machinery Breakdown Policy"
+- link "Electronics Equipment Policy"
+- link "Consequential Loss Policy"
+- link "Contractors All Risk Policy"
+- link "Marine cum Erection/ Storage Policy"
+- link "Advance Loss of Profit"
+- link "Contractor Plant and Machinery Policy"
+- link "Mega Package Policy"
+- link "Erection All Risk Policy"
+- link "Liability Insurance"
+- link "Public Liability Policy"
+- link "Products Liability Policy"
+- link "Professional Indemnity Policy"
+- link "Directors and Officers Liability Policy"
+- link "Lift Insurance"
+- link "Employers Liability Policy"
+- link "Workmen Compensation"
+- link "Carriers Liability Policy"
+- link "Liability Insurance Act Policy"
+- link "Golfers Indemnity Policy"
+- link "Fidelity Guarantee Insurance Policy"
+- link "Group Insurance"
+- link "Group Medical Insurance"
+- link "Group Personal Accident"
+- link "Group Term Life Insurance"
+- link "Group Travel Insurance"
+- link "Renewal"
+- link "Renewal Reminder"
+- link "Renew Existing Policy"
+- link "Health Insurance Renewal"
+- link "Health Landing"
+- link "Motor Landing"
+- link "Claim Assistance"
+- link "Media Library"
+- link "Learning Center"
+- link "Training"
+- link "Mock Test"
+- link "Mock Campus Test"
+- link "Mock BQP Test"
+- link "Media Library"
+- link "FAQ"
+- link "Insurance Dictionary"
+- link "POS"
+- link "Policy Login"
+- link "Blogs"
+- paragraph: Hi, BHUVANESWARI A
+- button
+- button
+- tablist:
+  - tab "PROPOSER DETAILS"
+  - tab "INSURED DETAILS"
+  - tab "MEDICAL HISTORY"
+  - tab "4 NOMINEE DETAILS" [selected]
+  - tab "5 SUMMARY"
+  - tabpanel "4 NOMINEE DETAILS":
+    - button "NOMINEE DETAILS" [expanded]
+    - region "NOMINEE DETAILS":
+      - textbox "Name of Nominee": nominee
+      - text: Name of Nominee
+      - combobox "Relationship with Insured MOTHER": MOTHER
+      - text: Relationship with Insured
+      - heading "BANK ACCOUNT DETAILS" [level=6]
+      - textbox "Bank Account No"
+      - text: Bank Account No
+      - textbox "IFSC Code"
+      - text: IFSC Code
+      - button "Back"
+      - button "Next"
+- heading "Summary" [level=3]
+- img "Care Health"
+- text: "Care Supreme Cover: ₹ 500000 Premium - 1 Year ₹ 9,838 Total Premium (incl. GST) ₹ 9,838"
+- paragraph: Contact
+- link "Whatsapp":
+  - paragraph:
+    - img
+    - text: Whatsapp
+- paragraph: Chat Bot
+```
+
+# Test source
+
+```ts
+   29 |
+   30 |   } else {
+   31 |     await page.waitForTimeout(5000); 
+   32 |     await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
+   33 |     await page.waitForTimeout(1000);
+   34 |     await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
+   35 |     await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
+   36 |   
+   37 |   await page.waitForTimeout(7000);
+   38 |
+   39 |   await page.getByRole('textbox', { name: 'Name' }).fill('Care Test');
+   40 |   await page.getByRole('textbox', { name: 'Email' }).fill('Care@gmail.com');
+   41 |   await page.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
+   42 |   await page.getByRole('button', { name: 'Next' }).click();
+   43 |
+   44 |   await page.locator('#mat-input-17').type('25');
+   45 |   await page.locator('#mat-input-19').type('25');
+   46 |   await page.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
+   47 |   await page.getByRole('button', { name: 'Proceed' }).click();
+   48 |   await page.getByRole('button', { name: '₹ 9838/Yr' }).click();
+   49 |
+   50 |   }
+   51 |  
+   52 |   await page.waitForTimeout(3000);
+   53 |   await page.getByText('Other', { exact: true }).click();
+   54 |   await page.getByLabel('Identity Proof Type').getByText('Identity Proof Type').click();
+   55 |   await page.getByText('PAN', { exact: true }).click();
+   56 |   await page.getByText('Address Proof TypeAddress').click();
+   57 |   await page.getByText('Voter ID').click();
+   58 |   // Setup file path for uploads
+   59 |
+   60 |   const uploadFile = path.join(__dirname, '../assets/Arunkumar.jpg');
+   61 |
+   62 |   // Mobile-specific file upload handling
+   63 |   for (let i = 0; i < 2; i++) {
+   64 |     const fileInput = await page.locator('input[type="file"]').nth(i);
+   65 |     // if (isMobile) await fileInput.scrollIntoViewIfNeeded();
+   66 |     await fileInput.setInputFiles(uploadFile);
+   67 |     await page.waitForTimeout(isMobile ? 2000 : 1000);
+   68 |   }
+   69 |
+   70 |   // Mobile-specific button handling for initial submit
+   71 |   const submitButton = page.getByRole('button', { name: 'Submit' });
+   72 | //   if (isMobile) await submitButton.scrollIntoViewIfNeeded();
+   73 |   await submitButton.click();
+   74 |
+   75 |   await page.locator('#cdk-accordion-child-17').getByText('TitleTitle *').click();
+   76 |   await page.getByText('Mr', { exact: true }).click();
+   77 |   await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('First Name *').type('test');
+   78 |   await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Last Name *').fill('s');
+   79 |   await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').type('08062002');
+   80 |   await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Email ID *').fill('free@gmail.com');
+   81 |   await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Mobile Number *').fill('8531913068');
+   82 |   await page.locator('#mat-input-32').fill('34');
+   83 |   await page.locator('#mat-input-33').fill('anna nagar ');
+   84 |   await page.locator('#mat-input-34').fill('627005');
+   85 |   await page.waitForTimeout(1000);
+   86 |   await page.locator('#mat-select-value-23').getByText('City').click();
+   87 |   await page.waitForTimeout(2000);
+   88 |   await page.getByText('Palayamkottai').click();
+   89 |   await page.locator('.mat-checkbox-inner-container').first().click();
+   90 |   await page.locator('span.mat-button-wrapper:has-text("Next")').nth(0).click();
+   91 |   await page.getByRole('strong').click();
+   92 |   await page.getByRole('textbox', { name: 'Height(Cm)' }).click();
+   93 |   await page.getByRole('textbox', { name: 'Height(Cm)' }).fill('170');
+   94 |   await page.locator('#cdk-accordion-child-23 div').filter({ hasText: /^Weight\(Kg\) \*$/ }).nth(3).click();
+   95 |   await page.getByRole('textbox', { name: 'Weight(Kg)' }).fill('70');
+   96 |   await page.getByRole('button', { name: 'SPOUSE DETAILS' }).click();
+   97 |   await page.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
+   98 |   await page.getByText('Ms', { exact: true }).click();
+   99 |   await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('First Name *').click();
+  100 |   await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('First Name *').fill('test');
+  101 |   await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Last Name *').click();
+  102 |   await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Last Name *').fill('w');
+  103 |   await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('First Name *').click();
+  104 |   await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('First Name *').fill('test');
+  105 |   await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').click();
+  106 |   await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('08062001');
+  107 |   await page.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
+  108 |   await page.getByText('SPOUSE', { exact: true }).click();
+  109 |   await page.locator('#cdk-accordion-child-24 div').filter({ hasText: /^Email ID \*$/ }).nth(3).click();
+  110 |   await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Email ID *').fill('free@gmail.com');
+  111 |   await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Mobile Number *').click();
+  112 |   await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Mobile Number *').fill('8531913068');
+  113 |   await page.getByRole('textbox', { name: 'Height(Cm)' }).click();
+  114 |   await page.getByRole('textbox', { name: 'Height(Cm)' }).fill('160');
+  115 |   await page.getByRole('textbox', { name: 'Weight(Kg)' }).click();
+  116 |   await page.getByRole('textbox', { name: 'Weight(Kg)' }).fill('60');
+  117 |   await page.locator('#cdk-accordion-child-24').getByRole('button', { name: 'Next' }).click();
+  118 |   await page.locator('#cdk-accordion-child-18').getByRole('button', { name: 'Next' }).click();
+  119 |
+  120 |
+  121 |   await page.getByRole('textbox', { name: 'Name of Nominee' }).type('nominee');
+  122 |   await page.getByRole('combobox', { name: 'Relationship with Insured' }).locator('div').nth(3).click();
+  123 |   await page.getByText('MOTHER', { exact: true }).click();
+  124 |   await page.locator('#cdk-accordion-child-19').getByRole('button', { name: 'Next' }).click();
+  125 |
+  126 |   // Enhanced mobile button handling for final submission
+  127 |   const copyLinkButton = page.getByRole('button', { name: 'Copy Link' });
+  128 |   if (isMobile) await copyLinkButton.scrollIntoViewIfNeeded();
+> 129 |   await copyLinkButton.click();
+      |                        ^ TimeoutError: locator.click: Timeout 40000ms exceeded.
+  130 |   
+  131 |   const payButton = page.getByRole('button', { name: 'Pay by Customer' });
+  132 |   if (isMobile) await payButton.scrollIntoViewIfNeeded();
+  133 |   await payButton.click();
+  134 | });
+```

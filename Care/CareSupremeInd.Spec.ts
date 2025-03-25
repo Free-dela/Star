@@ -76,11 +76,9 @@ test('Individual', async ({ page, isMobile }) => {
   
   await page.locator('#cdk-accordion-child-17').getByText('TitleTitle *').click();
   await page.getByText('Mr', { exact: true }).click();
-  await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('First Name *').click();
   await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('First Name *').fill('test');
-  await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Last Name *').click();
   await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Last Name *').fill('s');
-  await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('08062002');
+  await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').type('08062002');
   await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Email ID *').click();
   await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Email ID *').fill('free@gmail.com');
   await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Mobile Number *').click();
@@ -112,6 +110,8 @@ test('Individual', async ({ page, isMobile }) => {
   await page.getByRole('textbox', { name: 'Name of Nominee' }).type('nominee');
   await page.getByRole('combobox', { name: 'Relationship with Insured' }).locator('div').nth(3).click();
   await page.getByText('MOTHER', { exact: true }).click();
+  await page.getByRole('textbox', { name: 'Bank Account No' }).fill('237200021786');
+  await page.getByRole('textbox', { name: 'IFSC Code' }).fill('IOBA0002345');
   await page.locator('#cdk-accordion-child-19').getByRole('button', { name: 'Next' }).click();
 
   // Enhanced mobile button handling for final submission

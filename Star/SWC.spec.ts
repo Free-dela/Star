@@ -15,7 +15,7 @@ test('SWC', async ({ page, isMobile }) => {
         await page.waitForTimeout(4000);
         await page.getByRole('button').filter({ hasText: 'menu' }).click();
         await page.locator('a').filter({ hasText: 'Health Insurance' }).click();
-        await page.waitForTimeout(2000);
+        await page.waitForTimeout(4000);
         await page.getByRole('textbox', { name: 'Name' }).type('test ');
     await page.getByRole('textbox', { name: 'Email' }).type('freedela0912@gmail.com');
     await page.getByRole('textbox', { name: 'Mobile Number' }).click();
@@ -35,7 +35,7 @@ test('SWC', async ({ page, isMobile }) => {
         await page.waitForTimeout(1000);
         await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
         await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
-        await page.waitForTimeout(3000);
+        await page.waitForTimeout(5000);
 
     await page.getByRole('textbox', { name: 'Name' }).type('test ');
     await page.getByRole('textbox', { name: 'Email' }).type('freedela0912@gmail.com');
